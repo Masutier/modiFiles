@@ -1,0 +1,142 @@
+{% extends "modiFiles/layout.html" %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+    
+<div class="col-11 mx-auto mb-5">
+
+    <div class="col-9 mx-auto">
+        <div class="row">
+            <div class="col-3 mx-auto mt-5">
+                <img src="/static/img/pdf.png" class="imgpage" alt="PDF" />
+            </div>
+
+            <div class="col-9 mx-auto">
+                <div class="col-11 mx-auto mt-5">
+                    <h1>.pdf Manipulation App</h1>
+                </div>
+                <div class="col-11 mx-auto mt-3 mb-5">
+                    <p>.pdf or flat text files manipulation application</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="col-11 mx-auto mt-5">
+        <div class="row">
+            <div class="col-7 mx-auto mb-3">
+                <h3>Input a .pdf file to processing</h3>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="inputFile" class="form-label">The File</label>
+                        <input class="form-control" type="file" name="inputFile">
+                    </div>
+
+                    <h5 class="c">Processes to Perform:</h5>
+
+                    <hr>
+
+                    <div class="col-8 mx-auto">
+
+                        <div class="mb-3">
+                            <label for="newfoldername" class="form-label">Name for storage Folder</label>
+                            <input class="form-control" type="text" name="newfoldername" id="newfoldername" placeholder="new_folder name">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="newfilename" class="form-label">Name for new files</label>
+                            <input class="form-control" type="text" name="newfilename" id="newfilename" placeholder="new_file name">
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="col-11 mx-auto">
+                        <div class="row">
+
+                            <div class="col-5 mx-auto">
+                                <div class="mb-3">
+                                    <label for="divide" class="form-label">Divide Big File in Small Files</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="divide" id="divide1" value="divide" >
+                                        <label class="form-check-label" for="divide">Yes, Divide File</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="divide" id="divide2" value="notdivide" checked>
+                                        <label class="form-check-label" for="divide">No, Do not Divide File</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="chunk" class="form-label">Number of pages per new file</label>
+                                    <input class="form-control" type="text" name="chunk" id="chunk" placeholder="File divided by ...">
+                                    <h7>Max pages is 100</h7>
+                                </div>
+
+                            </div>
+
+                            <div class="col-5 mx-auto">
+                                <div class="mb-3">
+                                    <label for="extract" class="form-label">Extract every page to a single .jpg file</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="extract" id="extract1" value="extract" >
+                                        <label class="form-check-label" for="extract">Yes, Extract</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="extract" id="extract2" value="notextract" checked>
+                                        <label class="form-check-label" for="extract">No, Do not Extract</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="col-7 mx-auto">
+                        <div class="d-grid gap-2">
+                            <button id="butSpin" class="btn btn-primary btn-sm btn-color mt-3" type="submit" name="submit">Procesar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-4">
+                <div class="col-11 mx-auto mb-3">
+                    <h3>Warnings</h3>
+                    <p>See that a valid file is being uploaded</p>
+                    <p class="h7">If the file has already been processed, the previous folder will be overwritten</p>
+
+                    <p class="h7">If You not give "new_folder name", A name will be created with the .csv original file name, if the folder exist, new files will be add into that folder</p>
+
+                    <p class="h7">If You not give "new_file name", A name will be created with the .csv original file name</p>
+
+                    <hr>
+
+                    <p class="h7">New name for divides files will be someting like: fileName_part1.pdf, fileName_part2.pdf ...</p>
+
+                    <p class="h7">New name for .jpg files will be someting like: fileName_part1_1.jpg, fileName_part1_2.jpg ...</p>
+
+                    <hr>
+
+                    <p class="h7">You can divide a big file in small files and extract every page to a .jpg file at the same time, just check both</p>
+
+                    <hr>
+
+                    <p class="h7">If you pick "Yes, Divide File" but not give "Number of pages", The file will be divide in .pdf books of 100 pages each</p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

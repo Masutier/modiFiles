@@ -1,0 +1,216 @@
+{% extends "modiFiles/layout.html" %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+    
+<div class="col-11 mx-auto mb-5">
+
+    <div class="col-9 mx-auto">
+        <div class="row">
+            <div class="col-3 mx-auto mt-5">
+                <img src="/static/img/csv.png" class="imgpage" alt="CSV" />
+            </div>
+
+            <div class="col-9 mx-auto">
+                <div class="col-11 mx-auto mt-5">
+                    <h1>.csv Manipulation App</h1>
+                </div>
+                <div class="col-11 mx-auto mt-3 mb-5">
+                    <p>.csv or flat text files manipulation application</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="col-11 mx-auto mt-5">
+        <div class="row">
+            <div class="col-7 mx-auto mb-3">
+                <h3>Input a .csv file to processing</h3>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-9">
+                            <div class="mb-3">
+                                <label for="inputFile" class="form-label">The File</label>
+                                <input class="form-control" type="file" name="inputFile">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="mb-3">
+                                <label for="separator" class="form-label">Create Folder</label>
+                                <input class="form-control" type="text" name="separator" id="separator" placeholder="Separator">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <h5 class="c">Processes to Perform:</h5>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-5 mx-4">
+
+                            <div class="mb-3">
+                                <label for="newfolder" class="form-label">Create Folder</label>
+                                <input class="form-control" type="text" name="newfolder" id="newfolder" placeholder="new_folder name">
+                            </div>
+
+                            <hr>
+
+                            <div class="mb-3">
+                                <label for="divide" class="form-label">Divide Big File in Small Files</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="divide" id="divide1" value="divide" >
+                                    <label class="form-check-label" for="divide">Yes, Divide File</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="divide" id="divide2" value="notdivide" checked>
+                                    <label class="form-check-label" for="divide">No, Do not Divide File</label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="chunk" class="form-label">Number of Registers per Small File</label>
+                                <input class="form-control" type="text" name="chunk" id="chunk" placeholder="File divided by ...">
+                            </div>
+
+                            <hr>
+
+                            <div class="mb-3">
+                                <label for="clean" class="form-label"><h6 class="atxt3">Clean Columns **</h6></label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="clean" id="clean1" value="clean" >
+                                    <label class="form-check-label" for="clean">Yes, Clean columns</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="clean" id="clean2" value="notclean" checked>
+                                    <label class="form-check-label" for="clean">No, Do not clean columns</label>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="mb-3">
+                                <label for="toExcel" class="form-label">Convert .csv to excel file</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="toExcel" id="toExcel1" value="toExcel" >
+                                    <label class="form-check-label" for="toExcel">Yes, Convert</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="toExcel" id="toExcel2" value="nottoExcel" checked>
+                                    <label class="form-check-label" for="toExcel">No, Do not Convert</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-5">
+
+                            <div class="mb-3">
+                                <label for="json" class="form-label">Convert .csv to .json File</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="json" id="json1" value="json" >
+                                    <label class="form-check-label" for="json">Yes, Convert to .json</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="json" id="json2" value="notjson" checked>
+                                    <label class="form-check-label" for="json">No, Do not Convert to .json</label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="jsonType" class="form-label">What type of .json?</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="jsonType" id="jsonType1" value="jsonType" >
+                                    <label class="form-check-label" for="jsonType">By Registers</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="jsonType" id="jsonType2" value="notjsonType" checked>
+                                    <label class="form-check-label" for="jsonType">By Columns</label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="compress" class="form-label">Also Compress The File?</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="compress" id="compress1" value="compress" >
+                                    <label class="form-check-label" for="compress">Yes, Compress</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="compress" id="compress2" value="notcompress" checked>
+                                    <label class="form-check-label" for="compress">No, Do not Compress</label>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="mb-3">
+                                <label for="loadtosql" class="form-label">Load csv to SQLITE3 db With Pandas</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="loadtosql" id="loadtosql1" value="loadtosql" >
+                                    <label class="form-check-label" for="loadtosql">Yes, Load</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="loadtosql" id="loadtosql2" value="notloadtosql" checked>
+                                    <label class="form-check-label" for="loadtosql">No, Do not Load</label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-7 mx-auto">
+                        <div class="d-grid gap-2">
+                            <button id="butSpin" class="btn btn-primary btn-sm btn-color mt-3" type="submit" name="submit">Procesar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-4">
+                <div class="col-11 mx-auto mb-3">
+                    <h3>Warnings</h3>
+                    <p>See that a valid file is being uploaded</p>
+                    <p>If the file has already been processed, the previous folder will be overwritten</p>
+
+                    <hr>
+
+                    <p>If You not give "new_folder name", A name will be created with the .csv file name</p>
+
+                    <hr>
+
+                    <h6 class="atxt3">** Clean Columns Will:</h6>
+                    <p>Replace lower cases for upper cases</p>
+                    Replace:
+                    <ul>
+                        <li>Blank spaces for "_"</li>
+                        <li>"-" for "_"</li>
+                        <li>"Á" for "A" and "á" for "a"</li>
+                        <li>"É" for "E" and "é" for "e"</li>
+                        <li>"Í" for "I" and "í" for "i"</li>
+                        <li>"Ó" for "O" and "ó" for "o"</li>
+                        <li>"Ú" for "Ú" and "ú" for "u"</li>
+                        <li>"Ñ" for "N" and "ñ" for "n"</li>
+                    </ul>
+                    Eliminate: <br>
+                    "$", "?", "%", "@", "#", "/", "\\", "(" and ")".
+
+                    <h6 class="atxt3">The modifications will be only in the titles</h6>
+
+                    <hr>
+
+                    <p>Json "By Registers" will give you a file with register by register (full row by row)</p>
+                    <p>Json "By Columns" will give you a file with column by column</p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

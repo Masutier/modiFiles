@@ -1,0 +1,16 @@
+venv
+venv/*
+
+FILES
+FILES/*
+
+csv_all/__pycache__
+pdf_all/__pycache__
+xls_all/__pycache__
+
+static/docs/*
+
+media
+media/*
+
+senadlake.db

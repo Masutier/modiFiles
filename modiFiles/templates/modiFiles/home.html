@@ -1,0 +1,51 @@
+{% extends "modiFiles/layout.html" %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+
+<div class="col-12 mt-5 c">
+    <h1>Files Manipulation</h1>
+</div>
+
+<div class="col-11 mx-auto mt-5">
+    <div class="row">
+        <div class="col-5 mx-auto c">
+            <a class="nav-link atxt1" href="csvAllFiles">
+                <img src="/static/img/csv.png" class="imgico mb-3" alt="CSV" />
+                <h3>Process .csv files</h3>
+            </a>
+            <p>This section is for manipulate .csv files and some conversions to other formats or load to a DataBase</p>
+        </div>
+
+        <div class="col-5 mx-auto c">
+            <a class="nav-link atxt1" href="xlsxFirst">
+                <img src="/static/img/xls.png" class="imgico mb-3" alt="XLSX" />
+                <h3>Process .xlsx files</h3>
+            </a>
+            <p>This section is for manipulate .xlsx files and some conversions to other formats or to load to a DataBase</p>
+        </div>
+    </div>
+</div>
+
+<div class="col-11 mx-auto mt-5">
+    <div class="row">
+        <div class="col-5 mx-auto c">
+            <a class="nav-link atxt1" href="pdfAllFiles">
+                <img src="/static/img/pdf.png" class="imgico mb-3" alt="PDF" />
+                <h3>Process .pdf files</h3>
+            </a>
+            <p>This section is for manipulate .pdf files divide it in small books or convert to single .jpg's</p>
+        </div>
+
+        <div class="col-5 mx-auto c">
+            <a class="nav-link atxt1" href="#">
+                <img src="/static/img/icons8-file-48.png" class="imgico mb-3" alt="BLANK" />
+                <h3>In construction</h3>
+            </a>
+            <p>This section is in construction to an other grate section</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

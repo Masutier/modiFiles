@@ -1,0 +1,44 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <link rel="stylesheet" href="{% static 'css/all.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/color.css' %}" type="text/css" />
+
+    {% if title %}
+        <title>{% block title %}{% endblock %}</title>
+    {% else %}
+        <title>Files Manipulation</title>
+    {% endif %}
+
+</head>
+
+<body class="body ">
+    {% include 'modiFiles/partials/navbar.html' %}
+
+    <div class="col-12 mx-auto">
+        {% if messages %}
+            {% include 'modiFiles/partials/messages.html' %}
+        {% endif %}
+
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+    {% include 'modiFiles/partials/backtop.html' %}
+    {% include 'modiFiles/partials/footer.html' %}
+
+    <!-- JavaScript Bundle with Popper -->
+
+</body>
+</html>
+
+
+
